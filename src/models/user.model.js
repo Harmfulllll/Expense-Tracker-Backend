@@ -16,7 +16,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Email is required"],
       unique: true,
-      maxlength: 15,
       trim: true,
       validate: validator.isEmail,
     },
@@ -42,6 +41,10 @@ const userSchema = mongoose.Schema(
         ref: "Income",
       },
     ],
+    budget: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -50,7 +53,7 @@ const userSchema = mongoose.Schema(
 
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
   }
   next();
 });

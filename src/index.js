@@ -5,6 +5,9 @@ import cors from "cors";
 /* Import from other files */
 import dbconnect from "./database/db.js";
 
+/* Import routes */
+import userRoutes from "./routes/user.route.js";
+
 /* Configuaration */
 dotenv.config();
 
@@ -12,6 +15,7 @@ dotenv.config();
 const app = express();
 
 /* middlewares */
+app.use(express.json());
 
 /* cors setup */
 app.use(
@@ -22,8 +26,9 @@ app.use(
 );
 
 /* Routes */
+app.use("/api/users", userRoutes);
 
-let port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 /* DB connection */
 dbconnect()
