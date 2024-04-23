@@ -3,6 +3,9 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+// what else can i add to the existing user schema
+// what other fields can i add to the user schema
+
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -24,6 +27,16 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       min: 6,
+    },
+    firstName: {
+      type: String,
+      required: [true, "First name is required"],
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last name is required"],
+      trim: true,
     },
   },
   {
