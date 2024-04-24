@@ -2,6 +2,7 @@ import express from "express";
 import {
   changePassword,
   deleteUser,
+  getAllUsers,
   loginUser,
   logoutUser,
   registerUser,
@@ -22,5 +23,7 @@ userRouter.patch("/change-password", verifyToken, changePassword);
 userRouter.delete("/delete/:id", verifyToken, deleteUser);
 
 userRouter.patch("/update-budget", verifyToken, updateBudget);
+
+userRouter.get("/get-all-users", verifyToken, getAllUsers);
 
 export default userRouter;

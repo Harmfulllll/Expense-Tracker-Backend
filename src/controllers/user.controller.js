@@ -121,7 +121,7 @@ const getAllUsers = async (req, res) => {
     return res.json(new apiError(401, "Unauthorized"));
   }
   try {
-    const users = await userModel.find();
+    const users = await userModel.find().select("-password");
     return res.json(new apiResponse(200, "Users fetched successfully", users));
   } catch (error) {
     throw new apiError(500, error.message);
@@ -135,4 +135,5 @@ export {
   changePassword,
   deleteUser,
   updateBudget,
+  getAllUsers,
 };
