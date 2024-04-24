@@ -86,4 +86,53 @@ const changePassword = async (req, res) => {
     return res.json(new apiError(500, error.message));
   }
 };
-export { registerUser, loginUser, logoutUser, changePassword };
+const deleteUser = async (req, res) => {
+  //only an admin can delete a user
+  if (req.user.role !== "admin") {
+    return res.json(new apiError(401, "Unauthorized"));
+  }
+  try {
+    const user = await userModel.findByIdAndDelete(req.params.id);
+    if (!user) {
+      throw new apiError(404, "User not found");
+    }
+    return res.json(new apiResponse(200, "User deleted successfully"));
+  } catch (error) {
+    return res.json(new apiError(500, error.message));
+  }
+};
+
+const updateBudget = async (req, res) => {
+  try {
+    const { budget } = req.body;
+    if (!budget) {
+      throw new apiError(400, "Budget is required");
+    }
+    req.user.budget = budget;
+    await req.user.save();
+    return res.json(new apiResponse(200, "Budget updated successfully"));
+  } catch (error) {
+    return res.json(new apiError(500, error.message));
+  }
+};
+
+const getAllUsers = async (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.json(new apiError(401, "Unauthorized"));
+  }
+  try {
+    const users = await userModel.find();
+    return res.json(new apiResponse(200, "Users fetched successfully", users));
+  } catch (error) {
+    throw new apiError(500, error.message);
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  changePassword,
+  deleteUser,
+  updateBudget,
+};
