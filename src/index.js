@@ -8,6 +8,7 @@ import dbconnect from "./database/db.js";
 /* Import routes */
 import userRoutes from "./routes/user.route.js";
 import expenseRoutes from "./routes/expense.route.js";
+import incomeRoutes from "./routes/income.route.js";
 
 /* Configuaration */
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(
 /* Routes */
 app.use("/api/users", userRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/incomes", incomeRoutes);
 
 const port = process.env.PORT || 8080;
 

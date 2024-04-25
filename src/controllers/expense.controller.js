@@ -61,6 +61,43 @@ const getExpenses = async (req, res) => {
   }
 };
 
+const getAllExpenses = async (req, res) => {
+  try {
+    if (req.user.role === "admin") {
+      let expenses = [];
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const skip = (page - 1) * limit;
+
+      if (req.query.category) {
+        expenses = await expenseModel
+          .find({ category: req.query.category })
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limit);
+      } else {
+        expenses = await expenseModel
+          .find()
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limit);
+      }
+      if (!expenses.length)
+        return res.json(new apiError(200, "No expenses found"));
+
+      return res.json(
+        new apiResponse(200, "Expenses fetched successfully", expenses)
+      );
+    } else {
+      return res.json(
+        new apiError(403, "You are not authorized to view this page")
+      );
+    }
+  } catch (error) {
+    return res.json(new apiError(500, error.message));
+  }
+};
+
 const updateExpense = async (req, res) => {
   try {
     const { title, description, amount, category, date, paymentMethod } =
@@ -107,4 +144,10 @@ const deleteExpense = async (req, res) => {
   }
 };
 
-export { createExpense, getExpenses, updateExpense, deleteExpense };
+export {
+  createExpense,
+  getExpenses,
+  updateExpense,
+  deleteExpense,
+  getAllExpenses,
+};

@@ -13,6 +13,7 @@ const verifyToken = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await userModel.findById(decoded?._id).select("-password");
+
     if (!user) {
       throw new apiError(401, "Unauthorized");
     }

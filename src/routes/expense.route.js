@@ -3,6 +3,7 @@ import verifyToken from "../middlewares/verify.middleware.js";
 import {
   createExpense,
   deleteExpense,
+  getAllExpenses,
   getExpenses,
   updateExpense,
 } from "../controllers/expense.controller.js";
@@ -16,5 +17,7 @@ router.get("/get-expenses", verifyToken, getExpenses);
 router.patch("/update-expense", verifyToken, updateExpense);
 
 router.delete("/delete-expense/:id", verifyToken, deleteExpense);
+
+router.get("getall-expenses", verifyToken, getAllExpenses);
 
 export default router;
