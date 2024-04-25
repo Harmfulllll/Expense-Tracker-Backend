@@ -9,5 +9,13 @@ class apiError extends Error {
     if (stack) this.stack = stack;
     else Error.captureStackTrace(this, this.constructor);
   }
+  toJSON() {
+    return {
+      statusCode: this.statusCode,
+      message: this.message,
+      success: this.success,
+      errors: this.errors,
+    };
+  }
 }
 export default apiError;

@@ -32,17 +32,20 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     // check if all the field are present
     if (!email || !password) {
       return res.json(new apiError(400, "All fields are required"));
     }
 
     const user = await userModel.findOne({ email });
+
     if (!user) {
       return res.json(new apiError(400, "User does not exists"));
     }
 
     const isPassCorrect = await user.isPassCorrect(password);
+
     if (!isPassCorrect) {
       return res.json(new apiError(400, "Invalid credentials"));
     }
