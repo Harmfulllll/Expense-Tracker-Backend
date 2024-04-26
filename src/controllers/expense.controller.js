@@ -1,4 +1,6 @@
+import sendMail from "../middlewares/nodemailer.middleware.js";
 import expenseModel from "../models/expense.model.js";
+import userModel from "../models/user.model.js";
 import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
 import mongoose from "mongoose";
@@ -9,6 +11,34 @@ const createExpense = async (req, res) => {
       req.body;
     if (!title || !amount || !category || !date) {
       throw new apiError(400, "All fields are required");
+    }
+    const budget = await userModel.findById(req.user._id);
+    const previousExpenses = await expenseModel.find({ user: req.user._id });
+    const totalExpense = previousExpenses.reduce(
+      (total, expense) => total + expense.amount,
+      0
+    );
+    if (budget.budget < totalExpense + amount) {
+      let mailOptions = {
+        from: process.env.EMAIL,
+        to: req.user.email,
+        subject: "Expense Alert",
+        text: `You have exceeded your budget by ${
+          totalExpense + amount - budget.budget
+        }`,
+      };
+      sendMail(mailOptions);
+      return res.json(new apiError(400, "You have exceeded your budget"));
+    }
+    if (budget.budget < amount) {
+      let mailOptions = {
+        from: process.env.EMAIL,
+        to: req.user.email,
+        subject: "Expense Alert",
+        text: `You have exceeded your budget by ${amount - budget.budget}`,
+      };
+      sendMail(mailOptions);
+      return res.json(new apiError(400, "You have exceeded your budget"));
     }
     const newExpense = await expenseModel.create({
       title,
