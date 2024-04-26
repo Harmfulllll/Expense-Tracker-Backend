@@ -19,6 +19,6 @@ router.patch("/update-income", verifyToken, updateIncome);
 
 router.delete("/delete-income/:id", verifyToken, deleteIncome);
 
-router.get("getall-incomes", verifyToken, getAllIncomes);
+router.get("/getall-incomes", verifyToken, getAllIncomes);
 
 export default router;
