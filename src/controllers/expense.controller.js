@@ -174,10 +174,50 @@ const deleteExpense = async (req, res) => {
   }
 };
 
+const generateReport = async (req, res) => {
+  const { start, end } = req.body;
+  const user = req.user._id;
+  if (!start || !end) {
+    return res
+      .status(400)
+      .json(new apiError(400, "Start and end date are required"));
+  }
+  try {
+    const expenseList = await expenseModel.find({
+      user,
+      date: {
+        $gte: new Date(start),
+        $lte: new Date(end),
+      },
+    });
+    const totalExpenses = expenseList.reduce(
+      (total, expense) => total + expense.amount,
+      0
+    );
+
+    const expenseByCategory = expenseList.reduce((groups, expense) => {
+      const category = expense.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category] += expense.amount;
+      return groups;
+    }, {});
+    const report = {
+      totalExpenses,
+      expenseByCategory,
+    };
+    return res.json(new apiResponse(200, "Report generated", report));
+  } catch (error) {
+    return res.json(new apiError(500, error.message));
+  }
+};
+
 export {
   createExpense,
   getExpenses,
   updateExpense,
   deleteExpense,
   getAllExpenses,
+  generateReport,
 };

@@ -3,6 +3,7 @@ import verifyToken from "../middlewares/verify.middleware.js";
 import {
   createExpense,
   deleteExpense,
+  generateReport,
   getAllExpenses,
   getExpenses,
   updateExpense,
@@ -19,5 +20,7 @@ router.patch("/update-expense", verifyToken, updateExpense);
 router.delete("/delete-expense/:id", verifyToken, deleteExpense);
 
 router.get("getall-expenses", verifyToken, getAllExpenses);
+
+router.get("/generate-report", verifyToken, generateReport);
 
 export default router;
