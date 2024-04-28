@@ -1,9 +1,19 @@
+/*
+ * Title: user.controller.js
+ * Description : User controller
+ * Author: Tanvir Hassan Joy
+ * Date: 2024-04-28 12:13:54
+ */
+
 import jwt from "jsonwebtoken";
 
 import userModel from "../models/user.model.js";
 import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
 
+/**
+ * Registers a new user.
+ */
 const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -29,6 +39,9 @@ const registerUser = async (req, res) => {
   }
 };
 
+/**
+ * Login user and generate JWT token.
+ */
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -58,6 +71,10 @@ const loginUser = async (req, res) => {
   }
 };
 
+/**
+ * Logout user by removing the specified token from the user's tokens array.
+ * The token is sent in the request header.
+ */
 const logoutUser = async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(
@@ -69,6 +86,11 @@ const logoutUser = async (req, res) => {
   }
 };
 
+/**
+ * Change user password.
+ * The old password and new password are sent in the request body.
+ * The user's password is hashed before saving.
+ */
 const changePassword = async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
@@ -89,6 +111,13 @@ const changePassword = async (req, res) => {
     return res.json(new apiError(500, error.message));
   }
 };
+
+/**
+ * Deletes a user.
+ * Only an admin can delete a user.
+ * The user ID is sent as a URL parameter.
+ * The user is deleted from the database.
+ */
 const deleteUser = async (req, res) => {
   //only an admin can delete a user
   if (req.user.role !== "admin") {
@@ -105,6 +134,9 @@ const deleteUser = async (req, res) => {
   }
 };
 
+/**
+ * Updates the budget of a user.
+ */
 const updateBudget = async (req, res) => {
   try {
     const { budget } = req.body;
@@ -119,6 +151,10 @@ const updateBudget = async (req, res) => {
   }
 };
 
+/**
+ * Get all users.
+ * Only an admin can get all the users.
+ */
 const getAllUsers = async (req, res) => {
   if (req.user.role !== "admin") {
     return res.json(new apiError(401, "Unauthorized"));

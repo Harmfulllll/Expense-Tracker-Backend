@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+/**
+ * Represents the income schema for the Expense Tracker application.
+/** */
 const incomeSchema = mongoose.Schema(
   {
     title: {

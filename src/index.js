@@ -1,3 +1,10 @@
+/*
+ * Title: index.js
+ * Description : Main file
+ * Author: Tanvir Hassan Joy
+ * Date: 2024-04-28 11:50:41
+ */
+
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";

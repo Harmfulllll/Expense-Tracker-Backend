@@ -3,6 +3,9 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+/**
+ * User Schema
+ */
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -51,6 +54,9 @@ const userSchema = mongoose.Schema(
   }
 );
 
+/**
+ * Pre-save middleware to hash the password before saving the user.
+ */
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
@@ -58,6 +64,9 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+/**
+ * Generates a JSON Web Token (JWT) for the user.
+ */
 userSchema.methods.generateJWT = function () {
   return jwt.sign(
     {
@@ -71,6 +80,9 @@ userSchema.methods.generateJWT = function () {
   );
 };
 
+/**
+ * Checks if the provided password is correct.
+ */
 userSchema.methods.isPassCorrect = async function (data) {
   return await bcrypt.compare(data, this.password);
 };

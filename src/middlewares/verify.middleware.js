@@ -1,9 +1,10 @@
-// middleware to verify the token's validity
-
 import jwt from "jsonwebtoken";
 import userModel from "../models/user.model.js";
 import apiError from "../utils/apiError.js";
 
+/**
+ * Middleware function to verify the authenticity of a token.
+ */
 const verifyToken = async (req, res, next) => {
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");

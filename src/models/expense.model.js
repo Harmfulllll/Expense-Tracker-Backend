@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 // schema for the expense model
+
 const expenseSchema = mongoose.Schema(
   {
     title: {

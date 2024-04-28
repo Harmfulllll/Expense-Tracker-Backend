@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 
+/**
+ * Nodemailer transporter for sending emails.
+ */
 let sender = nodemailer.createTransport({
   service: process.env.EMAIL_SERVICE,
   auth: {
@@ -10,6 +13,9 @@ let sender = nodemailer.createTransport({
   host: "smtp.gmail.com",
 });
 
+/**
+ * Sends an email using the provided mail options.
+ */
 const sendMail = async (mailOptions) => {
   try {
     await sender.sendMail(mailOptions);

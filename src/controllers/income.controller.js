@@ -1,7 +1,17 @@
+/*
+ * Title: income.controller.js
+ * Description : Income controller
+ * Author: Tanvir Hassan Joy
+ * Date: 2024-04-28 12:14:14
+ */
+
 import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
 import incomeModel from "../models/income.model.js";
 
+/**
+ * Create a new income.
+ */
 const createIncome = async (req, res) => {
   try {
     const { title, description, amount, category, date } = req.body;
@@ -24,6 +34,11 @@ const createIncome = async (req, res) => {
   }
 };
 
+/**
+ * Get income based on the provided query parameters.
+ * If no query parameters are provided, it will return all the incomes of the logged in user.
+ * If category query parameter is provided, it will return all the incomes of the logged in user of that category.
+ */
 const getIncome = async (req, res) => {
   try {
     let income = [];
@@ -52,6 +67,11 @@ const getIncome = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves all incomes based on the provided query parameters.
+ * Only an admin can access this route.
+ * If no query parameters are provided, it will return all the incomes.
+ */
 const getAllIncomes = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -87,6 +107,9 @@ const getAllIncomes = async (req, res) => {
   }
 };
 
+/**
+ * Updates an income record in the database.
+ */
 const updateIncome = async (req, res) => {
   try {
     const { title, description, amount, category, date } = req.body;
@@ -115,6 +138,10 @@ const updateIncome = async (req, res) => {
   }
 };
 
+/**
+ * Deletes an income by its ID.
+ * User can only delete their own income.
+ */
 const deleteIncome = async (req, res) => {
   try {
     const deletedIncome = await incomeModel.findByIdAndDelete(req.params.id);

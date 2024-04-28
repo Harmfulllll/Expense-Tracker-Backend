@@ -1,4 +1,13 @@
+/*
+ * Title: user.route.js
+ * Description : route for user
+ * Author: Tanvir Hassan Joy
+ * Date: 2024-04-28 11:51:59
+ */
+
 import express from "express";
+
+/* import from user controller */
 import {
   changePassword,
   deleteUser,
@@ -26,4 +35,5 @@ userRouter.patch("/update-budget", verifyToken, updateBudget);
 
 userRouter.get("/get-all-users", verifyToken, getAllUsers);
 
+/* export routing */
 export default userRouter;
