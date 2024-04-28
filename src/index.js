@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet";
+import xss from "xss";
 
 /* Import from other files */
 import dbconnect from "./database/db.js";
@@ -15,6 +17,10 @@ dotenv.config();
 
 /* initialize app */
 const app = express();
+
+/* security */
+app.use(helmet());
+app.use(xss());
 
 /* middlewares */
 app.use(express.json());
