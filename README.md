@@ -2,7 +2,13 @@
 
 This is the backend for an expense tracker application. It is built with Node.js, Express, and MongoDB.
 
-## Features
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#Prerequisites)
+- [Installation](#installation)
+
+** ## Features **
 
 ### User Authentication and Authorization
 
@@ -40,10 +46,10 @@ The application uses various security measures such as HTTPS, input sanitization
 
 1. Clone the repository
 
-git clone https://github.com/Harmfulllll/Expense-Tracker-Backend.git
+`git clone https://github.com/Harmfulllll/Expense-Tracker-Backend.git `
 
 2.Install NPM packages
-npm install
+`npm install`
 
 3.Create a .env file in the root directory and add the following:
 MONGODB_URI=<your-mongodb-uri>
@@ -53,4 +59,4 @@ EMAIL=<your-email>
 4.Start the server
 
 Contact
-Tanvir Hassan Joy - Github
+Tanvir Hassan Joy - [Github](https://github.com/Harmfulllll)
