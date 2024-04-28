@@ -38,13 +38,10 @@ The application uses various security measures such as HTTPS, input sanitization
 
 ### Prerequisites
 
-![Node.js](https://nodejs.org/static/images/logo.svg)
-![Express.js](https://expressjs.com/images/express-facebook-share.png)
-![MongoDB](https://webassets.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png)
+<img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" width="300"/>
+<img src="https://expressjs.com/images/express-facebook-share.png" alt="Express.js" width="300"/>
+<img src="https://webassets.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png" alt="MongoDB" width="300"/>
 
-<img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" width="200"/>
-<img src="https://expressjs.com/images/express-facebook-share.png" alt="Express.js" width="200"/>
-<img src="https://webassets.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png" alt="MongoDB" width="200"/>
 ### Installation
 
 1.Clone the repository
