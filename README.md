@@ -51,10 +51,7 @@ The application uses various security measures such as HTTPS, input sanitization
 2.Install NPM packages
 `npm install`
 
-3.Create a .env file in the root directory and add the following:
-MONGODB_URI=<your-mongodb-uri>
-JWT_SECRET=<your-jwt-secret>
-EMAIL=<your-email>
+3.Create a .env file in the root directory and add the necessary values according to the code
 
 4.Start the server
 
