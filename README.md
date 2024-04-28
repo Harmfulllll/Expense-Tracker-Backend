@@ -38,9 +38,9 @@ The application uses various security measures such as HTTPS, input sanitization
 
 ### Prerequisites
 
-- Node.js
-- Express.js
-- MongoDB
+![Node.js](https://nodejs.org/static/images/logo.svg)
+![Express.js](https://expressjs.com/images/express-facebook-share.png)
+![MongoDB](https://www.mongodb.com/assets/images/global/leaf.svg)
 
 ### Installation
 
