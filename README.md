@@ -8,7 +8,7 @@ This is the backend for an expense tracker application. It is built with Node.js
 - [Prerequisites](#Prerequisites)
 - [Installation](#installation)
 
-** ## Features **
+## Features
 
 ### User Authentication and Authorization
 
@@ -44,7 +44,7 @@ The application uses various security measures such as HTTPS, input sanitization
 
 ### Installation
 
-1. Clone the repository
+1.Clone the repository
 
 `git clone https://github.com/Harmfulllll/Expense-Tracker-Backend.git `
 
